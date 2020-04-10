@@ -1,0 +1,51 @@
+{
+    "name": "@schemadb/sdk",
+    "version": "0.1.0-SNAPSHOT",
+    "description": "SchemaDB Node.js SDK",
+    "main": "dist/index.js",
+    "scripts": {
+        "test": "nyc --reporter=html mocha --require @babel/register",
+        "test:watch": "mocha --require @babel/register -w",
+        "lint": "eslint -c .eslintrc.yml src/**",
+        "build": "babel src --out-dir dist",
+        "prepublishOnly": "npm run build"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/schemadb/node-sdk.git"
+    },
+    "keywords": [
+        "schemadb",
+        "avro",
+        "saas",
+        "regiistry",
+        "events",
+        "mciroservices"
+    ],
+    "files": [
+        "dist"
+    ],
+    "author": "Alejandro Martin <hi@alejandromav.com>",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/schemadb/node-sdk/issues"
+    },
+    "homepage": "https://github.com/schemadb/node-sdk#readme",
+    "devDependencies": {
+        "@babel/cli": "^7.8.4",
+        "@babel/core": "^7.9.0",
+        "@babel/node": "^7.8.7",
+        "@babel/preset-env": "^7.9.5",
+        "@babel/register": "^7.9.0",
+        "babel-preset-minify": "^0.5.1",
+        "chai": "^4.2.0",
+        "eslint": "^6.8.0",
+        "mocha": "^7.1.1",
+        "nyc": "^15.0.1"
+    },
+    "dependencies": {
+        "avsc": "^5.4.20",
+        "log4js": "^6.1.2",
+        "node-fetch": "^2.6.0"
+    }
+}

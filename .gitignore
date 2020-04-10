@@ -1,0 +1,12 @@
+.DS_Store
+dist
+node_modules
+*.log
+.bundle
+vendor
+coverage
+.nyc_output
+
+# local scripts
+bin
+.npmrc
