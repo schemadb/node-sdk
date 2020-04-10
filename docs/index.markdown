@@ -6,9 +6,11 @@ nav_order: 1
 
 # Home
 
-Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.
+This is the Node.js SDK for [https://schemadb.com](https://schemadb.com).
 
-## Install
+**WARNING: this is still WIP.**
+
+## Installation
 
 ```bash
 npm i @schemadb/node-sdk
@@ -16,6 +18,4 @@ npm i @schemadb/node-sdk
 
 ## Usage
 
-```js
-const { someMiddleware } = require('@schemadb/node-sdk');
-```
+Please, have a look at [Quickstart](./quickstart.markdown).
