@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 
 import Exceptions from './lib/exceptions';
-import { setConfiguration, Settings } from './stores/configuration';
+import { setConfiguration, getConfiguration, Settings } from './stores/configuration';
+import { getLatestSchema } from './stores/schemas';
 
 const _validateAPIToken = apiToken => {
     return apiToken
@@ -40,7 +41,7 @@ export default {
      * @param {string} name Schema name
      */
     getSchema: async (namespace, name) => {
-        return;
+        return getLatestSchema(namespace, name);
     },
     /**
      * Encode JSON to binary Avro buffer.

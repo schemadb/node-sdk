@@ -2,5 +2,10 @@
     "presets": [
         "@babel/preset-env",
         "minify"
+    ],
+    "plugins": [
+        [ "@babel/plugin-transform-runtime",  {
+            "regenerator": true
+        } ]
     ]
 }

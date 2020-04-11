@@ -2,21 +2,42 @@ import fetch from 'node-fetch';
 import { getLogger } from '../lib/logger';
 const logger = getLogger('scehmadb-service');
 import { getConfiguration, Settings } from '../stores/configuration';
+import Exceptions from '../lib/exceptions';
 
 export const fetchSchemaById = async (schemaId)  => {
+    const apiURL = getConfiguration(Settings.API_URL);
+    const url = `${apiURL}/v0/schema/${schemaId}`;
+    return _fetch(url);
+};
+
+export const fetchLatestVersion = async (namespace, name)  => {
+    const apiURL = getConfiguration(Settings.API_URL);
+    const url = `${apiURL}/v0/schema/namespace/${namespace}/name/${name}/latest`;
+    return _fetch(url);
+};
+
+const _fetch = async (url, options) => {
     try {
-        const apiURL = getConfiguration(Settings.API_URL);
         const apiToken = getConfiguration(Settings.API_TOKEN);
-        const url = `${apiURL}/vo/schema/${schemaId}`;
-    
-        logger.debug(`Fetch schema from ${url}`);
-        return fetch(url, {
+
+        if (!apiToken) {
+            throw new Error(Exceptions.INVALID_API_TOKEN);
+        }
+        
+        const startAt = +new Date();
+        const response = await fetch(url, {
             headers: {
                 'Authorization': `Bearer ${apiToken}`
-            } 
-        }).then(res => res.json()).then(json  => json['data']);        
+            },
+            ...options
+        });
+
+        const endAt = +new Date();
+        logger.debug(`Request to ${url} took ${(endAt - startAt)}ms`);
+
+        return response.json();
     } catch (error) {
-        logger.debug(error);
-        throw 'Error fetching schema from API';        
+        logger.error(error);
+        throw new Error(Exceptions.SCHEMA_FETCH_ERROR);
     }
 };

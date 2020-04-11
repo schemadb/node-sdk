@@ -15,7 +15,7 @@ schemadb.init('1036fae0-3a28-11ea-a5e3-...');
 
 // You can also pass some options
 schemadb.init('1036fae0-3a28-11ea-a5e3-...', {
-    debug: true
+
 });
 ```
 
@@ -23,7 +23,6 @@ Available options are:
 
 | Option | Description | Type | Default value |
 | ------ | ----------- | ---- | ------------- |
-| `debug` | Enabled debug logging level | `Boolean` | `false` |
 
 ## Save a new schema
 
