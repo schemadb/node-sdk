@@ -2,7 +2,7 @@ import avro from 'avsc';
 import { toBytesInt32 } from './utils';
 import { getSchemaById } from './../stores/schemas';
 
-export const encode = async (schema, obj) => {
+export const encode = (schema, obj) => {
     const type = avro.Type.forSchema(schema['definition']);
     const magicByte = Buffer.alloc(1);
     const id = toBytesInt32(schema['id']);
