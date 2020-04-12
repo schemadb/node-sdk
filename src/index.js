@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 
 import Exceptions from './lib/exceptions';
-import { setConfiguration, getConfiguration, Settings } from './stores/configuration';
-import { getLatestSchema } from './stores/schemas';
+import { setConfiguration, Settings } from './stores/configuration';
+import { getLatestSchema, saveNewSchema } from './stores/schemas';
 
 const _validateAPIToken = apiToken => {
     return apiToken
@@ -10,7 +10,7 @@ const _validateAPIToken = apiToken => {
         && apiToken.length;
 };
 
-export default {
+module.exports = {
     /**
      * Initialize SchemaDB SDK.
      * 
@@ -32,7 +32,7 @@ export default {
      * @param {object} schema Avro JSON format schema to be saved
      */
     saveSchema: async (schema) => {
-        return;
+        return saveNewSchema(schema);
     },
     /**
      * Get latest schema version by namespace and name.
