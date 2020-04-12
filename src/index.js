@@ -3,7 +3,7 @@
 import Exceptions from './lib/exceptions';
 import { setConfiguration, Settings } from './stores/configuration';
 import { getLatestSchema, saveNewSchema } from './stores/schemas';
-import { encode } from './lib/avro-serializer';
+import { encode, decode } from './lib/avro-serializer';
 
 const _validateAPIToken = apiToken => {
     return apiToken
@@ -50,7 +50,7 @@ module.exports = {
      * @param {object} schema Avro JSON format schema to be saved
      * @param {object} payload Object to be encoded
      */
-    encode: async (schema, payload) => {
+    encode: (schema, payload) => {
         return encode(schema, payload);
     },
     /**
@@ -59,6 +59,6 @@ module.exports = {
      * @param {Buffer} binaryBuffer Avro binary encoded payload
      */
     decode: async (binaryBuffer) => {
-        return;
+        return decode(binaryBuffer);
     }
 };

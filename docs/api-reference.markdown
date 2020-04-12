@@ -15,7 +15,7 @@ nav_order: 3
 1. TOC
 {:toc}
 
-## `getSchema(namespace, name) -> Promise<Object>`
+## `getSchema(namespace, name) => Promise<Object>`
 {:toc}
 
 Get latest schema version for a given namespace and name. It caches versions in memory, so it only fetches from the API the first time any schema is used.
@@ -39,7 +39,7 @@ const schema = await schemadb.getSchema('com.example.store', 'order');
 
 ---------------
 
-## `saveSchema(schema) -> Promise<Object>`
+## `saveSchema(schema) => Promise<Object>`
 {:toc}
 
 Save new Avro schema to platform. Will fail if version already exists.
@@ -83,10 +83,10 @@ await schemadb.saveSchema(orderSchema);
 
 ---------------
 
-## `encode(schema, payload) -> Buffer`
+## `encode(schema, payload) => Buffer`
 {:toc}
 
-Encode objec to Avro binary [Buffer](https://nodejs.org/api/buffer.html).
+Encode `Object` to Avro binary [Buffer](https://nodejs.org/api/buffer.html).
 
 #### Parameters
 {: .no_toc }
@@ -113,4 +113,28 @@ const avro = await schemadb.encode(schema, {
     timeplaced: 1586193018930,
     orderStatus: 'A'
 });
+```
+---------------
+
+## `decode(binaryBuffer) => Promise<Object>`
+{:toc}
+
+Decode Avro binary [Buffer](https://nodejs.org/api/buffer.html) to `Object`.
+
+#### Parameters
+{: .no_toc }
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| binaryBuffer | `Buffer` | Avro encoded binary buffer |
+
+#### Example
+{: .no_toc }
+
+```js
+const schemadb = require('@schemadb/node-sdk');
+schemadb.init('1036fae0-3a28-11ea-a5e3-...');
+
+// Decode binary buffer to JSON object
+const payload = await schemadb.decode(avroBinaryBuffer);
 ```

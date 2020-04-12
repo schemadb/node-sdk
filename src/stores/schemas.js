@@ -11,7 +11,7 @@ export const getSchemaById = async (schemaId) => {
     if (schema) {
         logger.debug(`Cache hit: schema with id ${schema['id']} already in memory.`);
     } else {
-        logger.debug(`Cache miss: schema with id ${schema['id']} not found in memory. Fetching from API...`);
+        logger.debug(`Cache miss: schema with id ${schemaId} not found in memory. Fetching from API...`);
         schema = await fetchSchemaById(schemaId);
         _schemas.push(schema);
     }

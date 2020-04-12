@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [[#3](https://github.com/schemadb/node-sdk/issues/3)] Save new schema version to platform.
 - [[#4](https://github.com/schemadb/node-sdk/issues/4)] Encode payload.
+- [[#5](https://github.com/schemadb/node-sdk/issues/5)] Decode payload.
 
 ## [0.1.0-alpha.1] - 2020-04-12
 
