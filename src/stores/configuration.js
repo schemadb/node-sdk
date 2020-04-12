@@ -1,5 +1,5 @@
 const _configuration = {
-    'api-url': 'https://schemadb.com/api'
+    'api-url': 'https://www.schemadb.com/api'
 };
 
 export const Settings = Object.freeze({

@@ -1,6 +1,6 @@
 {
     "name": "@schemadb/sdk",
-    "version": "0.1.0-alpha.1",
+    "version": "0.2.0-SNAPSHOT",
     "description": "SchemaDB Node.js SDK",
     "main": "dist/index.js",
     "scripts": {
@@ -47,6 +47,6 @@
     "dependencies": {
         "avsc": "^5.4.20",
         "log4js": "^6.1.2",
-        "node-fetch": "^2.6.0"
+        "request": "^2.88.2"
     }
 }
