@@ -38,7 +38,7 @@ const orderSchema = {
           { "name": "orderId", "type": "long" },
           { "name": "storeId", "type": "long" },
           {
-          	"name": "timepalced",
+          	"name": "timeplaced",
            	"type": "long",
           	"logicalType": "timestamp-millis" 
           },

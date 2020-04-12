@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
 
 import Exceptions from './lib/exceptions';
-import { setConfiguration, getConfiguration, Settings } from './stores/configuration';
-import { getLatestSchema } from './stores/schemas';
+import { setConfiguration, Settings } from './stores/configuration';
+import { getLatestSchema, saveNewSchema } from './stores/schemas';
+import { encode, decode } from './lib/avro-serializer';
 
 const _validateAPIToken = apiToken => {
     return apiToken
@@ -10,7 +11,7 @@ const _validateAPIToken = apiToken => {
         && apiToken.length;
 };
 
-export default {
+module.exports = {
     /**
      * Initialize SchemaDB SDK.
      * 
@@ -32,7 +33,7 @@ export default {
      * @param {object} schema Avro JSON format schema to be saved
      */
     saveSchema: async (schema) => {
-        return;
+        return saveNewSchema(schema);
     },
     /**
      * Get latest schema version by namespace and name.
@@ -49,8 +50,8 @@ export default {
      * @param {object} schema Avro JSON format schema to be saved
      * @param {object} payload Object to be encoded
      */
-    encode: async (schema, payload) => {
-        return;
+    encode: (schema, payload) => {
+        return encode(schema, payload);
     },
     /**
      * Decado Avro binary to JSON object.
@@ -58,6 +59,6 @@ export default {
      * @param {Buffer} binaryBuffer Avro binary encoded payload
      */
     decode: async (binaryBuffer) => {
-        return;
+        return decode(binaryBuffer);
     }
 };
