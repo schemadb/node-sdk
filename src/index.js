@@ -3,6 +3,7 @@
 import Exceptions from './lib/exceptions';
 import { setConfiguration, Settings } from './stores/configuration';
 import { getLatestSchema, saveNewSchema } from './stores/schemas';
+import { encode } from './lib/avro-serializer';
 
 const _validateAPIToken = apiToken => {
     return apiToken
@@ -50,7 +51,7 @@ module.exports = {
      * @param {object} payload Object to be encoded
      */
     encode: async (schema, payload) => {
-        return;
+        return encode(schema, payload);
     },
     /**
      * Decado Avro binary to JSON object.

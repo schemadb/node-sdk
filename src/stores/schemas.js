@@ -1,6 +1,6 @@
 import { fetchSchemaById, fetchLatestVersion, postNewVersion } from '../services/schemadb-api-service';
 import { getLogger } from '../lib/logger';
-import { validateAvroSchema } from '../lib/utils';
+import { validateAvroSchema } from '../lib/avro-serializer';
 import Exceptions from '../lib/exceptions';
 const logger = getLogger('schema-store');
 const _schemas = [];
