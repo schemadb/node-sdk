@@ -1,15 +1,16 @@
 const _configuration = {
-    'api-url': 'https://schemadb.com/api/'
+    'api-url': 'https://schemadb.com/api'
 };
 
 export const Settings = Object.freeze({
+    DEBUG: 'debug',
     API_URL: 'api-url',
-    API_TOKEN: 'api-token',
-    DEBUG: 'debug'
+    API_TOKEN: 'api-token'
 });
 
 export const setConfiguration = (configKey, configValue) => {
-    return _configuration[configKey] = configValue;
+    _configuration[configKey] = configValue;
+    return;
 };
 
 export const getConfiguration = configKey => {

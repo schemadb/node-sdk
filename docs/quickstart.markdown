@@ -23,7 +23,7 @@ Available options are:
 
 | Option | Description | Type | Default value |
 | ------ | ----------- | ---- | ------------- |
-| `debug` | Enabled debug logging level | `Boolean` | `false` |
+| `debug` | Enables debug logging | `Boolean` | `false` |
 
 ## Save a new schema
 
