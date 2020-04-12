@@ -1,6 +1,6 @@
-import fetch from 'node-fetch';
+const request = require('request');
 import { getLogger } from '../lib/logger';
-const logger = getLogger('scehmadb-service');
+const logger = getLogger('schemadb-service');
 import { getConfiguration, Settings } from '../stores/configuration';
 import Exceptions from '../lib/exceptions';
 
@@ -16,28 +16,46 @@ export const fetchLatestVersion = async (namespace, name)  => {
     return _fetch(url);
 };
 
-const _fetch = async (url, options) => {
-    try {
-        const apiToken = getConfiguration(Settings.API_TOKEN);
-
-        if (!apiToken) {
-            throw new Error(Exceptions.INVALID_API_TOKEN);
-        }
-        
-        const startAt = +new Date();
-        const response = await fetch(url, {
-            headers: {
-                'Authorization': `Bearer ${apiToken}`
-            },
-            ...options
-        });
-
-        const endAt = +new Date();
-        logger.debug(`Request to ${url} took ${(endAt - startAt)}ms`);
-
-        return response.json();
-    } catch (error) {
-        logger.error(error);
-        throw new Error(Exceptions.SCHEMA_FETCH_ERROR);
-    }
+export const postNewVersion = async (schema)  => {
+    const apiURL = getConfiguration(Settings.API_URL);
+    const url = `${apiURL}/v0/schema/`;
+    return _fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(schema),
+        headers: { 'Content-Type': 'application/json' }
+    });
 };
+
+const _fetch = async (url, options = {}) => new Promise((resolve, reject) => {
+    const apiToken = getConfiguration(Settings.API_TOKEN);
+
+    if (!apiToken) {
+        throw new Error(Exceptions.INVALID_API_TOKEN);
+    }
+
+    const _options = {
+        url,
+        ...options,
+        headers: {
+            'Authorization': `Bearer ${apiToken}`,
+            ...options['headers']
+        }
+    };
+
+    logger.debug(`Request started: ${JSON.stringify(_options)}`);
+    const startAt = +new Date();
+    request(_options, (error, response, body) => {
+        logger.debug(`Request end: ${url} took ${(+new Date() - startAt)}ms`);
+    
+        if (error) {
+            logger.error(error);
+            reject(Exceptions.SCHEMA_FETCH_ERROR);
+        } else if (response.statusCode === 409) {
+            logger.error(body);
+            reject(Exceptions.VERSION_ALREADY_EXISTS);
+        } else {
+            const json = JSON.parse(body);
+            resolve(json['data'] || json);
+        }
+    });
+});

@@ -6,7 +6,4 @@ node_modules
 vendor
 coverage
 .nyc_output
-
-# local scripts
-bin
 .npmrc

@@ -2,8 +2,8 @@ import avro from 'avsc';
 import { toBytesInt32 } from './utils';
 import { getSchemaById } from './../stores/schemas';
 
-export const encode = async (schema, obj) => {
-    const type = avro.Type.forSchema(schema);
+export const encode = (schema, obj) => {
+    const type = avro.Type.forSchema(schema['definition']);
     const magicByte = Buffer.alloc(1);
     const id = toBytesInt32(schema['id']);
     const payload = type.toBuffer(obj);
@@ -16,6 +16,11 @@ export const decode = async (avroBuffer) => {
     const schemaId = avroBuffer.readInt32BE(1);
     const payload = avroBuffer.slice(5);
     const schema = await getSchemaById(schemaId);
-    const type = avro.Type.forSchema(schema);
+    const type = avro.Type.forSchema(schema['definition']);
     return type.fromBuffer(payload);
+};
+
+export const validateAvroSchema = (schema) => {
+    const type = avro.Type.forSchema(schema);
+    return type.isValid;
 };

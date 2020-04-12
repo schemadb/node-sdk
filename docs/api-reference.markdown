@@ -12,12 +12,16 @@ nav_order: 3
 ## Table of contents
 {: .no_toc .text-delta }
 
-## `getSchema(namespace, name) -> Promise`
+1. TOC
+{:toc}
+
+## `getSchema(namespace, name) => Promise<Object>`
 {:toc}
 
 Get latest schema version for a given namespace and name. It caches versions in memory, so it only fetches from the API the first time any schema is used.
 
 #### Parameters
+{: .no_toc }
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
@@ -25,11 +29,112 @@ Get latest schema version for a given namespace and name. It caches versions in 
 | name | `string` | Schema's name |
 
 #### Example
+{: .no_toc }
 
 ```js
-const schemadb = require('@schemadb/node-sdk');
+const schemadb = require('@schemadb/sdk');
 schemadb.init('1036fae0-3a28-11ea-a5e3-...');
 const schema = await schemadb.getSchema('com.example.store', 'order');
 ```
 
 ---------------
+
+## `saveSchema(schema) => Promise<Object>`
+{:toc}
+
+Save new Avro schema to platform. Will fail if version already exists.
+
+#### Parameters
+{: .no_toc }
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| schema | `Object` | [Avro JSON valid type](https://avro.apache.org/docs/current/spec.html#schemas) |
+
+#### Example
+{: .no_toc }
+
+```js
+const schemadb = require('@schemadb/sdk');
+schemadb.init('1036fae0-3a28-11ea-a5e3-...');
+
+const orderSchema = {
+	"version": 1,
+	"definition": {
+		"type": "record",
+		"namespace": "com.example.store",
+		"name": "order",
+		"fields": [
+          { "name": "orderId", "type": "long" },
+          { "name": "storeId", "type": "long" },
+          {
+          	"name": "timeplaced",
+           	"type": "long",
+          	"logicalType": "timestamp-millis" 
+          },
+          { "name": "orderStatus", "type": "string" }
+        ]
+	}
+};
+
+// Save schema to platform
+await schemadb.saveSchema(orderSchema);
+```
+
+---------------
+
+## `encode(schema, payload) => Buffer`
+{:toc}
+
+Encode `Object` to Avro binary [Buffer](https://nodejs.org/api/buffer.html).
+
+#### Parameters
+{: .no_toc }
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| schema | `Object` | [Avro JSON valid type](https://avro.apache.org/docs/current/spec.html#schemas) |
+| payload | `Object` | Object to be encoded |
+
+#### Example
+{: .no_toc }
+
+```js
+const schemadb = require('@schemadb/sdk');
+schemadb.init('1036fae0-3a28-11ea-a5e3-...');
+
+// Get latest schema by namespace and name
+const schema = await schemadb.getSchema('com.example.store', 'order');
+
+// Encode payload
+const avro = await schemadb.encode(schema, {
+    orderId: 1234567890,
+    storeId: 1234,
+    timeplaced: 1586193018930,
+    orderStatus: 'A'
+});
+```
+---------------
+
+## `decode(binaryBuffer) => Promise<Object>`
+{:toc}
+
+Decode Avro binary [Buffer](https://nodejs.org/api/buffer.html) to `Object`.
+
+#### Parameters
+{: .no_toc }
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| binaryBuffer | `Buffer` | Avro encoded binary buffer |
+
+#### Example
+{: .no_toc }
+
+```js
+const schemadb = require('@schemadb/sdk');
+schemadb.init('1036fae0-3a28-11ea-a5e3-...');
+
+// Decode binary buffer to JSON object
+const payload = await schemadb.decode(avroBinaryBuffer);
+```
