@@ -80,3 +80,37 @@ const orderSchema = {
 // Save schema to platform
 await schemadb.saveSchema(orderSchema);
 ```
+
+---------------
+
+## `encode(schema, payload) -> Buffer`
+{:toc}
+
+Encode objec to Avro binary [Buffer](https://nodejs.org/api/buffer.html).
+
+#### Parameters
+{: .no_toc }
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| schema | `Object` | [Avro JSON valid type](https://avro.apache.org/docs/current/spec.html#schemas) |
+| payload | `Object` | Object to be encoded |
+
+#### Example
+{: .no_toc }
+
+```js
+const schemadb = require('@schemadb/node-sdk');
+schemadb.init('1036fae0-3a28-11ea-a5e3-...');
+
+// Get latest schema by namespace and name
+const schema = await schemadb.getSchema('com.example.store', 'order');
+
+// Encode payload
+const avro = await schemadb.encode(schema, {
+    orderId: 1234567890,
+    storeId: 1234,
+    timeplaced: 1586193018930,
+    orderStatus: 'A'
+});
+```
