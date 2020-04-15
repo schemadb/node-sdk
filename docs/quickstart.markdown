@@ -72,5 +72,5 @@ const avro = await schemadb.encode(schema, {
 
 ```js
 // Decode binary buffer to JSON object
-const payload = await schemadb.decode(avroBinaryBuffer);
+const { payload } = await schemadb.decode(avroBinaryBuffer);
 ```
