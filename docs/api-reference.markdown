@@ -32,7 +32,7 @@ Get latest schema version for a given namespace and name. It caches versions in 
 {: .no_toc }
 
 ```js
-const schemadb = require('@schemadb/node-sdk');
+const schemadb = require('@schemadb/sdk');
 schemadb.init('1036fae0-3a28-11ea-a5e3-...');
 const schema = await schemadb.getSchema('com.example.store', 'order');
 ```
@@ -55,7 +55,7 @@ Save new Avro schema to platform. Will fail if version already exists.
 {: .no_toc }
 
 ```js
-const schemadb = require('@schemadb/node-sdk');
+const schemadb = require('@schemadb/sdk');
 schemadb.init('1036fae0-3a28-11ea-a5e3-...');
 
 const orderSchema = {
@@ -100,7 +100,7 @@ Encode `Object` to Avro binary [Buffer](https://nodejs.org/api/buffer.html).
 {: .no_toc }
 
 ```js
-const schemadb = require('@schemadb/node-sdk');
+const schemadb = require('@schemadb/sdk');
 schemadb.init('1036fae0-3a28-11ea-a5e3-...');
 
 // Get latest schema by namespace and name
@@ -132,7 +132,7 @@ Decode Avro binary [Buffer](https://nodejs.org/api/buffer.html) to `Object`.
 {: .no_toc }
 
 ```js
-const schemadb = require('@schemadb/node-sdk');
+const schemadb = require('@schemadb/sdk');
 schemadb.init('1036fae0-3a28-11ea-a5e3-...');
 
 // Decode binary buffer to JSON object
