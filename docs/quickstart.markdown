@@ -10,7 +10,7 @@ First of all, login to [https://schemadb.com](https://schemadb.com) and head to 
 
 ## Initialize
 ```js
-const schemadb = require('@schemadb/node-sdk');
+const schemadb = require('@schemadb/sdk');
 schemadb.init('1036fae0-3a28-11ea-a5e3-...');
 
 // You can also pass some options

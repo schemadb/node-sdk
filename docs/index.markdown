@@ -13,7 +13,7 @@ This is the Node.js SDK for [https://schemadb.com](https://schemadb.com).
 ## Installation
 
 ```bash
-npm i @schemadb/node-sdk
+npm i @schemadb/sdk
 ```
 
 ## Usage
