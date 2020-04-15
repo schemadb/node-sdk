@@ -51,8 +51,9 @@ const _fetch = async (url, options = {}) => new Promise((resolve, reject) => {
             logger.error(error);
             reject(Exceptions.SCHEMA_FETCH_ERROR);
         } else if (response.statusCode === 409) {
-            logger.error(body);
             reject(Exceptions.VERSION_ALREADY_EXISTS);
+        } else if (response.statusCode === 404) {
+            reject(Exceptions.SCHEMA_NOT_FOUND);
         } else {
             const json = JSON.parse(body);
             resolve(json['data'] || json);
