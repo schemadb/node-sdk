@@ -17,7 +17,10 @@ export const decode = async (avroBuffer) => {
     const payload = avroBuffer.slice(5);
     const schema = await getSchemaById(schemaId);
     const type = avro.Type.forSchema(schema['definition']);
-    return type.fromBuffer(payload);
+    return {
+        schema,
+        payload: type.fromBuffer(payload)
+    };
 };
 
 export const validateAvroSchema = (schema) => {
