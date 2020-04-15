@@ -119,7 +119,7 @@ const avro = await schemadb.encode(schema, {
 ## `decode(binaryBuffer) => Promise<Object>`
 {:toc}
 
-Decode Avro binary [Buffer](https://nodejs.org/api/buffer.html) to `Object`.
+Decode Avro binary [Buffer](https://nodejs.org/api/buffer.html) to `Object`. Returns both the payload and the schema.
 
 #### Parameters
 {: .no_toc }
@@ -136,5 +136,5 @@ const schemadb = require('@schemadb/sdk');
 schemadb.init('1036fae0-3a28-11ea-a5e3-...');
 
 // Decode binary buffer to JSON object
-const payload = await schemadb.decode(avroBinaryBuffer);
+const { payload, schema } = await schemadb.decode(avroBinaryBuffer);
 ```

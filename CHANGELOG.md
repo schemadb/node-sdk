@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - [[#13](https://github.com/schemadb/node-sdk/issues/13)] Fix runtime dependencies.
+- [[#15](https://github.com/schemadb/node-sdk/issues/15)] Return also the schema in decode method.
 
 ## [0.1.0] - 2020-04-12
 
