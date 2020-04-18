@@ -2,7 +2,7 @@
 
 import Exceptions from './lib/exceptions';
 import { setConfiguration, Settings } from './stores/configuration';
-import { getLatestSchema, saveNewSchema } from './stores/schemas';
+import { getLatestSchema, getSchemaVersion, saveNewSchema } from './stores/schemas';
 import { encode, decode } from './lib/avro-serializer';
 
 const _validateAPIToken = apiToken => {
@@ -41,8 +41,12 @@ module.exports = {
      * @param {string} namespace Schema namespace
      * @param {string} name Schema name
      */
-    getSchema: async (namespace, name) => {
-        return getLatestSchema(namespace, name);
+    getSchema: async (namespace, name, version) => {
+        if (version === undefined) {
+            return getLatestSchema(namespace, name);
+        } else {
+            return getSchemaVersion(namespace, name, version);
+        }
     },
     /**
      * Encode JSON to binary Avro buffer.

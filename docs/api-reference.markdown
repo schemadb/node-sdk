@@ -15,10 +15,12 @@ nav_order: 3
 1. TOC
 {:toc}
 
-## `getSchema(namespace, name) => Promise<Object>`
+## `getSchema(namespace, name, version) => Promise<Object>`
 {:toc}
 
 Get latest schema version for a given namespace and name. It caches versions in memory, so it only fetches from the API the first time any schema is used.
+
+If no version is specified, the latest one is returned.
 
 #### Parameters
 {: .no_toc }
@@ -27,6 +29,7 @@ Get latest schema version for a given namespace and name. It caches versions in 
 | ---- | ---- | ----------- |
 | namespace | `string` | Schema's namespace |
 | name | `string` | Schema's name |
+| version | `string` | *(optional)* Schema's version |
 
 #### Example
 {: .no_toc }
@@ -34,7 +37,12 @@ Get latest schema version for a given namespace and name. It caches versions in 
 ```js
 const schemadb = require('@schemadb/sdk');
 schemadb.init('1036fae0-3a28-11ea-a5e3-...');
-const schema = await schemadb.getSchema('com.example.store', 'order');
+
+// The latest version is returned if no version is passed
+const latestSchemaVersion = await schemadb.getSchema('com.example.store', 'order');
+
+// Or just specify some
+const schemaV2 = await schemadb.getSchema('com.example.store', 'order', '2');
 ```
 
 ---------------
