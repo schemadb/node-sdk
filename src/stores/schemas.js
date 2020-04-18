@@ -1,4 +1,4 @@
-import { fetchSchemaById, fetchLatestVersion, postNewVersion } from '../services/schemadb-api-service';
+import { fetchSchemaById, fetchLatestVersion, postNewVersion, fetchVersion } from '../services/schemadb-api-service';
 import { getLogger } from '../lib/logger';
 import { validateAvroSchema } from '../lib/avro-serializer';
 import Exceptions from '../lib/exceptions';
@@ -36,6 +36,25 @@ export const getLatestSchema = async (namespace, name) => {
 
     return schema;
 };
+
+export const getSchemaVersion = async (namespace, name, version) => {
+    let schema = _schemas.filter(s => {
+        return s['definition']['namespace'] === namespace
+            && s['definition']['name'] === name
+            && s['version'] === version;
+    })[0];
+
+
+    if (schema) {
+        logger.debug(`Cache hit: schema version ${version} already in memory.`);
+    } else {
+        logger.debug(`Cache miss: ${namespace}::${name} version ${version} not found in memory. Fetching from API...`);
+        schema = await fetchVersion(namespace, name, version);
+        _schemas.push(schema);
+    }
+
+    return schema;
+}; 
 
 export const saveNewSchema = async (schemaData) => {
     if (validateAvroSchema(schemaData['definition'])) {

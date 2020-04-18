@@ -26,6 +26,12 @@ export const postNewVersion = async (schema)  => {
     });
 };
 
+export const fetchVersion = async (namespace, name, version)  => {
+    const apiURL = getConfiguration(Settings.API_URL);
+    const url = `${apiURL}/v0/schema/namespace/${namespace}/name/${name}/version/${version}`;
+    return _fetch(url);
+};
+
 const _fetch = async (url, options = {}) => new Promise((resolve, reject) => {
     const apiToken = getConfiguration(Settings.API_TOKEN);
 

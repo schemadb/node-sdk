@@ -1,11 +1,56 @@
-// a {
-//     color: #333;
-// }
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
 
 .site-footer {
     display: none;
 }
 
-h2 code, h2 a {
-    font-size: 24px;
+@media (min-width: 66.5rem) {
+    .side-bar {
+        width: calc((100% - 1064px) / 2 + 350px);
+        min-width: 350px;
+    }
+
+    .navigation, .site-header, .site-footer {
+        width: 350px;
+    }
+    .main-content {
+        margin-left: calc((100% - 1064px) / 2 + 350px);
+    }
+}
+
+@media (min-width: 50rem) {
+    .site-header {
+        border: none;
+    }
+}
+
+@media (min-width: 31.25rem) and (min-width: 50rem) {
+    .navigation-list-item {
+        font-size: 32px !important;
+    }
+    .site-header a,
+    .navigation-list-item {
+        text-align: right;
+    }
+    
+    h2 code, h2 a {
+        font-size: 24px;
+    }
+
+    .side-bar {
+        background-color: #fff;
+    }
+
+    .site-title {
+        display: none;
+    }
+
+    .navigation-list-link {
+        color: #bbb;
+        font-weight: 300;
+    }
 }
