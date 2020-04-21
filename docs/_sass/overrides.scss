@@ -1,24 +1,34 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700');
+@import url('./custom/code-highlight-dracula.scss');
 
 body {
     font-family: 'Open Sans', sans-serif;
+    --side-bar-size: 150px;
 }
 
 .site-footer {
     display: none;
 }
 
+pre.highlight, figure.highlight, code {
+    background-color: inherit;
+}
+
+code {
+    font-size: 14px;
+}
+
 @media (min-width: 66.5rem) {
     .side-bar {
-        width: calc((100% - 1064px) / 2 + 350px);
-        min-width: 350px;
+        width: calc((100% - 1064px) / 2 + var(--side-bar-size));
+        min-width: var(--side-bar-size);
     }
 
     .navigation, .site-header, .site-footer {
-        width: 350px;
+        width: var(--side-bar-size);
     }
     .main-content {
-        margin-left: calc((100% - 1064px) / 2 + 350px);
+        margin-left: calc((100% - 1064px) / 2 + var(--side-bar-size));
     }
 }
 

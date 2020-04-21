@@ -1,12 +1,14 @@
 ---
 layout: default
 title: Quickstart
-nav_order: 2
+nav_order: 3
 ---
 
 # Quickstart
 
 First of all, login to [https://schemadb.com](https://schemadb.com) and head to API Tokens page. you can create a new one over there.
+
+You can see more details about [authentication here](./authentication.markdown).
 
 ## Initialize
 ```js
