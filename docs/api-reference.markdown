@@ -1,12 +1,12 @@
 ---
 layout: default
 title: API Reference
-nav_order: 3
+nav_order: 4
 ---
 
 # API Reference
 
-# Navigation Structure
+## Navigation Structure
 {: .no_toc }
 
 ## Table of contents
@@ -14,6 +14,8 @@ nav_order: 3
 
 1. TOC
 {:toc}
+
+---------------
 
 ## `getSchema(namespace, name, version) => Promise<Object>`
 {:toc}
